@@ -28,26 +28,26 @@ export default function Home() {
             className="max-w-3xl"
           >
             <div className="inline-block px-4 py-1 mb-6 border border-primary/30 bg-primary/10 text-primary font-display tracking-widest text-sm uppercase">
-              Free Fire Professional Team
+              The Social Network for Esports
             </div>
             <h1 className="text-6xl md:text-8xl font-display font-black text-white mb-6 uppercase leading-none">
               Beyond <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary glitch-effect" data-text="LIMITS">LIMITS</span>
             </h1>
             <p className="text-xl text-gray-300 font-sans mb-10 max-w-2xl text-lg md:text-xl">
-              The premier destination for mobile esports. Compete in our weekly Free Fire tournaments, follow the professional roster, and gear up.
+              Forging the future of esports communities. Connect with top fraggers, follow pro rosters, post match scorecards, and earn Limitless Points in tournament circuits.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/tournaments">
+              <Link href="/feed">
                 <a className="bg-primary text-black font-display font-bold tracking-widest px-8 py-4 uppercase hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2 group shadow-[0_0_20px_rgba(0,255,0,0.3)]">
                   <Trophy className="h-5 w-5" />
-                  Join Tournament
+                  Join Community Feed
                   <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Link>
-              <Link href="/store">
+              <Link href="/explore">
                 <a className="border border-white/20 glass-panel text-white font-display font-bold tracking-widest px-8 py-4 uppercase hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
-                  Shop Merch
+                  Explore Community
                 </a>
               </Link>
             </div>
