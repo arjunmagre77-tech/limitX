@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Image, BarChart2, Trophy, Smile, Send } from "lucide-react";
+import { Image, BarChart2, Trophy, Smile, Send, LogIn } from "lucide-react";
+import { Link } from "wouter";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { MatchResultData } from "@shared/schema";
+import { useAuth } from "@/hooks/use-auth";
 
 interface PostComposerProps {
   onPostCreated?: () => void;
 }
 
 export function PostComposer({ onPostCreated }: PostComposerProps) {
+  const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,6 +27,22 @@ export function PostComposer({ onPostCreated }: PostComposerProps) {
 
   const charLimit = 280;
   const remainingChars = charLimit - content.length;
+
+  if (!isAuthenticated) {
+    return (
+      <div className="glass-panel border border-primary/30 p-6 mb-6 text-center relative overflow-hidden">
+        <h3 className="font-display font-bold text-white text-base uppercase mb-1">Join the Conversation</h3>
+        <p className="text-xs text-gray-400 font-sans mb-4">Log in or create an account to share tournament results, clips, and posts.</p>
+        <Link href="/login">
+          <a className="inline-flex items-center gap-2 bg-primary text-black font-display font-bold uppercase tracking-widest text-xs px-6 py-2.5 hover:bg-white transition-colors neon-border">
+            <LogIn className="w-4 h-4" /> Log In to Post
+          </a>
+        </Link>
+      </div>
+    );
+  }
+
+  const avatarUrl = user?.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${user?.username || 'challenger'}`;
 
   const handleAttachImage = () => {
     // Provide realistic esports gameplay screenshot options
@@ -73,8 +92,8 @@ export function PostComposer({ onPostCreated }: PostComposerProps) {
     <div className="glass-panel border border-primary/30 p-4 mb-6 relative overflow-hidden">
       <div className="flex items-start gap-3">
         <img
-          src="https://api.dicebear.com/7.x/bottts/svg?seed=challenger"
-          alt="Avatar"
+          src={avatarUrl}
+          alt={user?.displayName || "Avatar"}
           className="w-10 h-10 rounded-full border border-primary/50 object-cover"
         />
 

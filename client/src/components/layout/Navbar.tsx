@@ -59,32 +59,40 @@ export function Navbar() {
 
           {/* Right Action Bar */}
           <div className="hidden md:flex items-center gap-4">
-            {currentUser && (
-              <PointsBadge points={currentUser.points} levelTitle={currentUser.levelTitle} />
+            {currentUser ? (
+              <>
+                <PointsBadge points={currentUser.points} levelTitle={currentUser.levelTitle} />
+
+                <Link href="/notifications">
+                  <a className="p-2 text-gray-400 hover:text-primary transition-colors relative" title="Notifications">
+                    <Bell className="w-5 h-5" />
+                    <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full animate-ping"></span>
+                  </a>
+                </Link>
+
+                <Link href="/feed">
+                  <a className="bg-primary text-black font-display font-bold tracking-widest px-4 py-2 uppercase text-xs hover:bg-white transition-colors flex items-center gap-1 neon-border">
+                    <Plus className="w-4 h-4" /> POST
+                  </a>
+                </Link>
+
+                <Link href={`/profile/${currentUser.username}`}>
+                  <a className="flex items-center gap-2 border border-white/10 p-1 rounded-sm hover:border-primary transition-colors">
+                    <img
+                      src={currentUser.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${currentUser.username}`}
+                      alt="User"
+                      className="w-7 h-7 rounded-full object-cover"
+                    />
+                  </a>
+                </Link>
+              </>
+            ) : (
+              <Link href="/login">
+                <a className="bg-primary text-black font-display font-bold tracking-widest px-5 py-2 uppercase text-xs hover:bg-white transition-colors flex items-center gap-2 neon-border">
+                  <User className="w-4 h-4" /> LOG IN
+                </a>
+              </Link>
             )}
-
-            <Link href="/notifications">
-              <a className="p-2 text-gray-400 hover:text-primary transition-colors relative" title="Notifications">
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full animate-ping"></span>
-              </a>
-            </Link>
-
-            <Link href="/feed">
-              <a className="bg-primary text-black font-display font-bold tracking-widest px-4 py-2 uppercase text-xs hover:bg-white transition-colors flex items-center gap-1 neon-border">
-                <Plus className="w-4 h-4" /> POST
-              </a>
-            </Link>
-
-            <Link href={`/profile/${currentUser?.username || "guest_player"}`}>
-              <a className="flex items-center gap-2 border border-white/10 p-1 rounded-sm hover:border-primary transition-colors">
-                <img
-                  src={currentUser?.avatar || "https://api.dicebear.com/7.x/bottts/svg?seed=challenger"}
-                  alt="User"
-                  className="w-7 h-7 rounded-full object-cover"
-                />
-              </a>
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}

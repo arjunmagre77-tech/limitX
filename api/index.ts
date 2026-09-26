@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "../server/routes";
 import { createServer } from "http";
+import { setupAuth } from "../server/auth";
 
 const app = express();
 const httpServer = createServer(app);
@@ -20,6 +21,8 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: false }));
+
+setupAuth(app);
 
 // Normalize req.url for Vercel serverless rewrites
 app.use((req, _res, next) => {
